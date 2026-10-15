@@ -1,0 +1,24 @@
+{
+  "revision": 1,
+  "schema_version": 1,
+  "skills": [
+    {
+      "id": "android.settings.open",
+      "path": "skills/android/settings/open.json",
+      "sha256": "06be148f130ce630d56d5c9a04900ded3769ff7c51b6a100e16bbf8afb6ff2f6",
+      "version": 1
+    },
+    {
+      "id": "google.maps.navigate",
+      "path": "skills/google/maps/navigate.json",
+      "sha256": "a3778719055caaaf15d7de1d7e023a25d3c25eb12a260b67c0733e9a2798b913",
+      "version": 1
+    },
+    {
+      "id": "google.youtube.search",
+      "path": "skills/google/youtube/search.json",
+      "sha256": "bb22e094b578755f05594d18bf7573da80991d84c36f6ec3ca271a23d0752209",
+      "version": 1
+    }
+  ]
+}

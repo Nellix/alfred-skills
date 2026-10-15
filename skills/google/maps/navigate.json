@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "google.maps.navigate",
+  "version": 1,
+  "canonical_intent": "navigation.route",
+  "title": "Preview a Google Maps route",
+  "description": "Open a Google Maps directions preview for a generalized destination.",
+  "match": {
+    "goal_template": "Navigate to ${destination} with Maps",
+    "parameter_types": {"destination": "string"},
+    "source_screen": "*"
+  },
+  "safety": "safe",
+  "terminal": true,
+  "actions": [
+    {
+      "action": "open_deep_link",
+      "package": "com.google.android.apps.maps",
+      "uri": "https://www.google.com/maps/dir/?api=1&destination=${destination|url}"
+    }
+  ]
+}

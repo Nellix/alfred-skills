@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "google.youtube.search",
+  "version": 1,
+  "canonical_intent": "media.youtube.search",
+  "title": "Search YouTube",
+  "description": "Open YouTube search results for a generalized query without choosing a result.",
+  "match": {
+    "goal_template": "Open YouTube and search for ${query}",
+    "parameter_types": {"query": "string"},
+    "source_screen": "*"
+  },
+  "safety": "safe",
+  "terminal": true,
+  "actions": [
+    {
+      "action": "open_deep_link",
+      "package": "com.google.android.youtube",
+      "uri": "https://www.youtube.com/results?search_query=${query|url}"
+    }
+  ]
+}

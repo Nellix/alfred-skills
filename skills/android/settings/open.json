@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "id": "android.settings.open",
+  "version": 1,
+  "canonical_intent": "android.settings.open",
+  "title": "Open Android Settings",
+  "description": "Open the Android system Settings application without an LLM call.",
+  "match": {
+    "goal_template": "Open Android Settings",
+    "parameter_types": {},
+    "source_screen": "*"
+  },
+  "safety": "safe",
+  "terminal": true,
+  "actions": [
+    {"action": "launch_app", "package": "com.android.settings"}
+  ]
+}
