@@ -1,5 +1,5 @@
 {
-  "revision": 1,
+  "revision": 2,
   "schema_version": 1,
   "skills": [
     {
@@ -18,6 +18,14 @@
       "id": "google.youtube.search",
       "path": "skills/google/youtube/search.json",
       "sha256": "bb22e094b578755f05594d18bf7573da80991d84c36f6ec3ca271a23d0752209",
+      "version": 1
+    }
+  ],
+  "workflows": [
+    {
+      "id": "alfred.settings.open",
+      "path": "workflows/alfred/settings/open.json",
+      "sha256": "7628f54dd32dbb4c6768d7dbe5d1db32c4bb171c8872b7884deca7c02866010a",
       "version": 1
     }
   ]

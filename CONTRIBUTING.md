@@ -1,4 +1,4 @@
-# Contributing a skill
+# Contributing skills and workflows
 
 Alfred skills are public executable policy. Treat a pull request like a code change, not a prompt
 collection.
@@ -27,6 +27,11 @@ skills/google/youtube/search.json
 Skill IDs and canonical intents are stable dotted identifiers. Increase `version` when behavior
 changes. Do not reuse a version for different content.
 
+Place multi-step task graphs under `workflows/<publisher-or-platform>/<application>/<intent>.json`.
+Every workflow must be acyclic, use semantic screen IDs and labels, reach all declared nodes from
+its entry node, and include device-verification evidence. Do not publish a workflow until a replay
+has completed successfully on a real device or emulator.
+
 ## Pull-request workflow
 
 1. Fork this repository and create a branch.
@@ -38,7 +43,8 @@ changes. Do not reuse a version for different content.
    ```
 
 4. Run `python3 scripts/build_registry.py --check`.
-5. Open a pull request using the template and explain the tested Android version/application.
+5. Open a pull request using the template and explain the tested Android version/application. For
+   workflows, include the successful-run count and confirm whether replay required a model call.
 6. Address automated validation and human safety review.
 
 Merging the pull request publishes the new catalog. Alfred clients see it on their next manual or

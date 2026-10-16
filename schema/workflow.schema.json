@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Nellix/alfred-skills/schema/workflow.schema.json",
+  "title": "Alfred workflow",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "version", "canonical_intent", "title", "description", "match", "safety", "entry_node", "nodes", "verification"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{2,127}$"},
+    "version": {"type": "integer", "minimum": 1},
+    "canonical_intent": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{2,127}$"},
+    "title": {"type": "string", "minLength": 3, "maxLength": 80},
+    "description": {"type": "string", "minLength": 10, "maxLength": 300},
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["goal_template", "parameter_types"],
+      "properties": {
+        "goal_template": {"type": "string", "minLength": 3, "maxLength": 240},
+        "parameter_types": {"type": "object", "additionalProperties": {"enum": ["string", "integer", "boolean"]}}
+      }
+    },
+    "safety": {"enum": ["safe", "confirm"]},
+    "entry_node": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{2,127}$"},
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "source_screen", "actions", "children", "terminal"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{2,127}$"},
+          "source_screen": {"type": "string", "minLength": 1, "maxLength": 240},
+          "actions": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["action"],
+              "properties": {
+                "action": {"enum": ["launch_app", "open_deep_link", "click", "set_text", "scroll", "back", "wait", "stop"]},
+                "target": {"type": ["string", "null"]},
+                "value": {"type": ["string", "null"]},
+                "package": {"type": ["string", "null"]},
+                "uri": {"type": ["string", "null"]}
+              }
+            }
+          },
+          "children": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{2,127}$"}},
+          "terminal": {"type": "boolean"}
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "verified_runs", "replay_model_calls"],
+      "properties": {
+        "status": {"const": "device_verified"},
+        "verified_runs": {"type": "integer", "minimum": 1},
+        "replay_model_calls": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

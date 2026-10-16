@@ -3,7 +3,7 @@
 This repository is the public, reviewable skill catalog for
 [Alfred](https://github.com/Nellix/alfred), a local-first Android AI agent.
 
-Every shared skill is ordinary JSON. Every change is a pull request. The Android application pulls
+Every shared skill and multi-step workflow is ordinary JSON. Every change is a pull request. The Android application pulls
 the generated catalog directly from GitHub, verifies its revision, paths, SHA-256 digests, schema,
 parameters, actions, and safety constraints, then atomically replaces its local downloaded catalog.
 There is no registry server, container, Kubernetes cluster, or database.
@@ -15,8 +15,10 @@ skills/
   android/settings/       Android system settings skills
   google/maps/            Google Maps and navigation skills
   google/youtube/         YouTube skills
+workflows/                Device-verified reusable task graphs
 registry/index.json       Generated catalog consumed by Alfred
 schema/skill.schema.json  Human- and tool-readable format
+schema/workflow.schema.json Workflow graph format
 scripts/build_registry.py Validation and deterministic index builder
 docs/                     Format, governance, and security documentation
 ```
@@ -31,6 +33,10 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md). A contribution must:
 4. require confirmation for interactive actions;
 5. pass `python3 scripts/build_registry.py --check` in CI;
 6. be reviewed and merged through a pull request.
+
+Workflows additionally declare an acyclic tree/DAG of screen-matched nodes and device-verification
+evidence. This lets Alfred reuse an entire successful plan while still re-planning a missing edge
+when the UI diverges.
 
 ## Local validation
 

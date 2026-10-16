@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "alfred.settings.open",
+  "version": 1,
+  "canonical_intent": "alfred.settings.open",
+  "title": "Open Alfred settings",
+  "description": "Open Alfred's own settings screen from its assistant home screen.",
+  "match": {
+    "goal_template": "Open Alfred settings",
+    "parameter_types": {}
+  },
+  "safety": "confirm",
+  "entry_node": "open-settings",
+  "nodes": [
+    {
+      "id": "open-settings",
+      "source_screen": "ai.alfred.app:ai.alfred.app.MainActivity:*",
+      "actions": [
+        {
+          "action": "click",
+          "target": "label:Open settings"
+        }
+      ],
+      "children": [
+        "settings-opened"
+      ],
+      "terminal": false
+    },
+    {
+      "id": "settings-opened",
+      "source_screen": "ai.alfred.app:ai.alfred.app.ui.SettingsActivity:*",
+      "actions": [
+        {
+          "action": "stop"
+        }
+      ],
+      "children": [],
+      "terminal": true
+    }
+  ],
+  "verification": {
+    "status": "device_verified",
+    "verified_runs": 2,
+    "replay_model_calls": 0
+  }
+}

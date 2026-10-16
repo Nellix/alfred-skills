@@ -1,4 +1,4 @@
-# Skill format
+# Skills and workflow formats
 
 Each skill document has schema version `1` and these fields:
 
@@ -21,3 +21,18 @@ The generated `registry/index.json` contains only catalog metadata and a SHA-256
 skill file. Clients download the index first and reject rollback, same-revision equivocation,
 unexpected paths, digest mismatches, invalid schemas, and unsafe actions before committing an
 update.
+
+## Workflow format
+
+A workflow is a reviewed, acyclic task graph under `workflows/`. It has the same identity,
+intent-template, parameter, action, and safety rules as a skill, plus:
+
+- `entry_node`: the first node ID;
+- `nodes[].source_screen`: an exact semantic screen ID, `*`, or a prefix ending in `*`;
+- `nodes[].children`: possible next nodes selected by the next observed screen;
+- `nodes[].terminal`: terminal nodes have no children; non-terminal nodes have at least one;
+- `verification`: device-test evidence (`device_verified`, successful run count, and replay model calls).
+
+The builder rejects cycles, unreachable nodes, missing children, invalid wildcard placement, and
+unverified workflows. A workflow contains generalized templates and semantic labels only—never raw
+prompts, screenshots, accessibility trees, account data, or concrete parameter values.
